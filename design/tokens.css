@@ -1,0 +1,55 @@
+/* 青柠集 · 校园二手交易平台 Demo — 设计变量
+   风格：清新自然（浅绿白底 + 森林绿主色 + 麦黄点缀）
+   全套 8 屏共用；改这里，所有屏一起变。 */
+:root{
+  /* —— 颜色（按角色定义）—— */
+  --color-primary:#3C7A48;          /* 主色：关键操作 / 当前项（白字 ≥4.5:1）*/
+  --primary:var(--color-primary);
+  --btn-primary:var(--color-primary); /* 主按钮底色：跟随品牌滑块 */
+  --primary-deep:#275632;            /* 主色深一档：价格、强调文字 */
+  --primary-soft:#E3EFDB;            /* 主色浅底 */
+  --accent:#E0A24B;                  /* 麦黄：标签 / 徽章 */
+  --accent-deep:#8E5222;             /* 麦黄深一档：小字保证对比度 */
+
+  --bg:#F7FAF4;                      /* 页面底色 */
+  --surface:#FFFFFF;                 /* 卡片 / 栏 */
+  --surface-2:#EDF3E8;               /* 分组底 / 浅标签 */
+  --surface-3:#F0F4EC;
+  --ink:#1E3326;                     /* 正文 */
+  --muted:#5B6E5C;                   /* 次要文字（对白底 ≥4.5:1）*/
+  --line:#E4ECE0;                    /* 描边 / 分割 */
+  --on-primary:#FFFFFF;
+  --danger:#B4463A;
+
+  /* —— 字体 —— */
+  --font:"PingFang SC","HarmonyOS Sans SC","MiSans","Microsoft YaHei",system-ui,sans-serif;
+  --font-display:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
+
+  /* —— 字号阶梯（一屏最多 4 档）—— */
+  --fs-12:12px; --fs-14:14px; --fs-16:16px; --fs-20:20px;
+  --fs-24:24px; --fs-28:28px; --fs-32:32px;
+
+  /* —— 间距（4 的倍数）—— */
+  --sp-1:4px;  --sp-2:8px;  --sp-3:12px; --sp-4:16px;
+  --sp-5:20px; --sp-6:24px; --sp-8:32px; --sp-10:40px; --sp-12:48px;
+
+  /* —— 圆角 —— */
+  --radius-sm:10px;
+  --radius-md:16px;                  /* 调节滑块：圆角 */
+  --radius-lg:20px;
+  --radius-pill:999px;
+
+  /* —— 阴影（最多两档）—— */
+  --shadow-1:0 4px 16px rgba(46,106,61,.07);
+  --shadow-2:0 10px 28px rgba(46,106,61,.14);
+
+  /* —— 调节滑块默认值 —— */
+  --density:1;                       /* 留白疏密 */
+  --flow-columns:2;                  /* 商品排法：grid 用 2，list 用 1 */
+}
+
+/* 商品排法：data-layout="list" 时改单列大卡 */
+html[data-layout="list"] .flow,
+html[data-layout="list"] .results{columns:var(--flow-columns);}
+html[data-layout="grid"]{--flow-columns:2;}
+html[data-layout="list"]{--flow-columns:1;}

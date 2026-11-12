@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-layout="grid">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>消息 · 青柠集</title>
+<script src="icons.js"></script>
+<script src="data.js"></script>
+<script src="store.js"></script>
+<script src="shell.js"></script>
+<script src="app.js"></script>
+<style>
+.msghead{padding:var(--sp-4) var(--sp-5) 0}
+.msghead h1{font-size:var(--fs-28);font-weight:700;letter-spacing:-.02em}
+.msghead p{font-size:var(--fs-14);color:var(--muted);margin-top:6px}
+.listrow .tx small{display:block;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;max-width:210px;white-space:normal}
+.listrow .tx b{font-size:var(--fs-16)}
+.unread{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;
+  border-radius:999px;background:var(--danger);color:#fff;font-size:var(--fs-12);font-weight:600;vertical-align:middle}
+.msg-note{display:flex;align-items:center;gap:8px;padding:var(--sp-4) var(--sp-5);
+  font-size:var(--fs-12);color:var(--muted)}
+.msg-note svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+</style>
+</head>
+<body data-page="messages" data-active="messages">
+
+<div class="msghead"><h1>消息</h1><p>和同学的咨询都在这里</p></div>
+
+<div class="msg-note"><svg viewBox="0 0 24 24"><use href="#i-bell"/></svg>演示数据 · 点击任一会话可进入模拟聊天</div>
+
+<div class="listgroup" id="msglist"></div>
+
+</body>
+</html>

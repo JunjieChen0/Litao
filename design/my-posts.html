@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-layout="grid">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>我的发布 · 青柠集</title>
+<script src="icons.js"></script>
+<script src="data.js"></script>
+<script src="store.js"></script>
+<script src="shell.js"></script>
+<script src="app.js"></script>
+<style>
+.subhead{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-4) var(--sp-5) 0}
+.subhead span{font-size:var(--fs-14);color:var(--muted)}
+.subhead a{font-size:var(--fs-14);color:var(--primary-deep);font-weight:600;min-height:44px;min-width:44px;padding-left:8px;display:inline-flex;align-items:center;justify-content:flex-end}
+</style>
+</head>
+<body data-page="myposts" data-active="profile" data-tabbar="none">
+
+<div class="topnav">
+  <a class="iconbtn" href="profile.html" aria-label="返回"><svg class="ti" viewBox="0 0 24 24"><use href="#i-back"/></svg></a>
+  <h1>我的发布</h1>
+  <a class="iconbtn" href="publish.html" aria-label="发布"><svg class="ti" viewBox="0 0 24 24"><use href="#i-plus"/></svg></a>
+</div>
+
+<div class="subhead"><span>共 <b id="postcount">0</b> 件 · 点「下架」可从首页移除</span><a href="publish.html">+ 发布</a></div>
+<div id="myposts" style="margin-top:16px"></div>
+
+</body>
+</html>

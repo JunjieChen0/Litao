@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-layout="grid">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>设置 · 青柠集</title>
+<script src="icons.js"></script>
+<script src="data.js"></script>
+<script src="store.js"></script>
+<script src="shell.js"></script>
+<script src="app.js"></script>
+</head>
+<body data-active="profile" data-tabbar="none">
+
+<div class="topnav">
+  <a class="iconbtn" href="profile.html" aria-label="返回"><svg class="ti" viewBox="0 0 24 24"><use href="#i-back"/></svg></a>
+  <h1>设置</h1>
+  <span class="spacer"></span>
+</div>
+
+<div class="sectitle" style="font-size:12px;color:var(--muted);padding:20px 20px 8px">账号与偏好</div>
+<div class="listgroup">
+  <div class="listrow"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-pin"/></svg></span>
+    <span class="tx"><b>所在校区</b><small>主校区</small></span><span class="tail">主校区</span></div>
+  <div class="listrow"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-bell"/></svg></span>
+    <span class="tx"><b>新消息提醒</b><small>Demo 演示项</small></span><span class="tail">开启</span></div>
+  <div class="listrow"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-user"/></svg></span>
+    <span class="tx"><b>校内认证</b><small>学生身份已认证</small></span><span class="stat on">已认证</span></div>
+</div>
+
+<div class="sectitle" style="font-size:12px;color:var(--muted);padding:24px 20px 8px">演示数据</div>
+<div class="listgroup">
+  <a class="listrow" href="#" id="reset"><span class="ic" style="background:#F5EAD3;color:#8E5222"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></span>
+    <span class="tx"><b>重置演示数据</b><small>清空本地发布 / 收藏 / 消息，恢复初始商品</small></span>
+    <svg class="chev" viewBox="0 0 24 24"><use href="#i-chev"/></svg></a>
+</div>
+
+<div class="about" style="margin:20px;padding:16px;border-radius:16px;background:var(--surface-2);font-size:12px;color:var(--muted);line-height:1.7">
+  青柠集是课程设计 Demo，不做真实用户体系。所有内容存于本机浏览器，清除浏览器数据即可完全重置。
+</div>
+
+<script>
+document.getElementById('reset').addEventListener('click', function(e){
+  e.preventDefault();
+  Object.keys(localStorage).filter(function(k){ return k.indexOf('qingningji.v1.')===0; })
+    .forEach(function(k){ localStorage.removeItem(k); });
+  window.Store.init();
+  if (window.QN && window.QN.toast) window.QN.toast('演示数据已重置');
+  else alert('演示数据已重置');
+});
+</script>
+</body>
+</html>

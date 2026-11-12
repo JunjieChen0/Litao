@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>方向 B · 清新自然</title>
+<style>
+:root{
+  --bg:#F7FAF4; --surface:#FFFFFF; --surface-2:#EDF3E8;
+  --ink:#1E3326; --muted:#5B6E5C; --line:#E4ECE0;
+  --primary:#4A8A57; --primary-deep:#2F6A3D; --accent:#E0A24B;
+  --on-primary:#FFFFFF;
+  --font:"PingFang SC","HarmonyOS Sans SC","MiSans","Microsoft YaHei",system-ui,sans-serif;
+  --r-sm:10px; --r-md:16px; --r-lg:20px; --r-pill:999px;
+  --shadow:0 4px 16px rgba(46,106,61,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding-bottom:calc(83px + 16px)}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ti{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+
+.statusbar{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:sticky;top:0;z-index:20;background:var(--bg)}
+.sb-time{font-size:16px;font-weight:600;letter-spacing:.02em}
+.sb-icons{width:78px;height:14px;fill:var(--ink)}
+
+.head{padding:20px 20px 0}
+.head h1{font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1.3}
+.head p{font-size:14px;color:var(--muted);margin-top:6px}
+.head .count{color:var(--primary-deep);font-weight:600}
+
+.searchbox{display:flex;gap:10px;padding:18px 20px 0}
+.searchfield{flex:1;height:48px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;gap:9px;padding:0 15px;color:var(--muted);font-size:14px;box-shadow:var(--shadow)}
+.searchfield svg{width:18px;height:18px;fill:none;stroke:var(--primary);stroke-width:1.9;stroke-linecap:round}
+.searchbtn{width:48px;height:48px;flex:0 0 48px;border-radius:var(--r-pill);background:var(--primary);display:grid;place-items:center}
+.searchbtn svg{width:20px;height:20px;fill:none;stroke:var(--on-primary);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* 分类宫格 */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 6px;padding:24px 16px 22px}
+.cat{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;min-height:44px}
+.cat .bubble{width:52px;height:52px;border-radius:18px;display:grid;place-items:center}
+.cat .bubble svg{width:25px;height:25px;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+.strip{height:8px;background:var(--surface-2)}
+
+.filters{display:flex;align-items:center;gap:8px;padding:16px 20px 4px;overflow-x:auto;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;height:44px;display:inline-flex;align-items:center;padding:0 14px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--line);font-size:12px;color:var(--muted)}
+.chip.on{background:var(--primary-deep);border-color:var(--primary-deep);color:var(--on-primary);font-weight:600}
+.filters .spacer{flex:1}
+
+.sechead{display:flex;align-items:baseline;justify-content:space-between;padding:18px 20px 12px}
+.sechead h2{font-size:20px;font-weight:700}
+.sechead .meta{font-size:12px;color:var(--muted)}
+
+/* 双列瀑布流 */
+.flow{columns:2;column-gap:12px;padding:0 16px}
+.card{break-inside:avoid;background:var(--surface);border-radius:var(--r-md);overflow:hidden;margin-bottom:12px;border:1px solid var(--line);box-shadow:var(--shadow);display:block}
+.ph{position:relative;overflow:hidden;display:grid;place-items:center;background:var(--ph-bg)}
+.ph::before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:#fff;opacity:.3;right:-30px;top:-30px}
+.ph-art{width:58%;height:58%;position:relative;z-index:1}
+.card .body{padding:10px 11px 12px}
+.card .ttl{font-size:14px;font-weight:600;line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.card .row{display:flex;align-items:center;justify-content:space-between;margin-top:9px;gap:4px}
+.price{font-size:20px;font-weight:700;color:var(--primary-deep);white-space:nowrap}
+.price small{font-size:12px;margin-right:1px}
+.cond{font-size:12px;color:var(--muted);background:var(--surface-2);border-radius:var(--r-pill);padding:3px 7px;white-space:nowrap}
+.card .who{font-size:12px;color:var(--muted);margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge{position:absolute;z-index:2;left:8px;top:8px;height:20px;display:inline-flex;align-items:center;padding:0 8px;border-radius:var(--r-pill);background:var(--accent);color:#3A2A10;font-size:12px;font-weight:700}
+
+.tabbar{position:fixed;left:0;right:0;bottom:0;height:83px;padding:0 8px 34px;display:flex;align-items:flex-start;background:var(--surface);border-top:1px solid var(--line);z-index:30}
+.tab{flex:1;height:49px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px;color:var(--muted)}
+.tab.active{color:var(--primary-deep);font-weight:600}
+.tab-pub{justify-content:flex-start;gap:2px}
+.tab-pub .pub{width:44px;height:44px;margin-top:-16px;border-radius:50%;background:var(--primary);display:grid;place-items:center;box-shadow:0 6px 16px rgba(74,138,87,.32)}
+.tab-pub .pub svg{width:24px;height:24px;fill:none;stroke:var(--on-primary);stroke-width:2;stroke-linecap:round}
+.home-indicator{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:999px;background:var(--ink);opacity:.82;z-index:31}
+</style>
+</head>
+<body>
+
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 15a3 3 0 0 1-3 3H8l-4 3V6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3z"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21a8 8 0 0 1 16 0"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM21 21l-4.3-4.3"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 0-2 2zM8 3v16"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+<symbol id="i-cup" viewBox="0 0 24 24"><path d="M5 4h12v9a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5zM17 6h2a2 2 0 0 1 0 4h-2M4 21h14"/></symbol>
+<symbol id="i-shirt" viewBox="0 0 24 24"><path d="M9 3 4 6l2 4 2-1v11h8V9l2 1 2-4-5-3a3 3 0 0 1-6 0Z"/></symbol>
+<symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3c4 4 4 14 0 18M3 12h18"/></symbol>
+<symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20 8 6l10 4-4 10zM8 6l4-3 8 3"/></symbol>
+<symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 18v-9m0 4h18v5M3 12h9a3 3 0 0 1 3 3v0H3zM21 12V8a2 2 0 0 0-2-2h-8"/></symbol>
+<symbol id="i-dots" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="18" cy="12" r="1.5"/></symbol>
+<symbol id="ph-book" viewBox="0 0 64 64"><rect x="12" y="16" width="40" height="26" rx="3" fill="var(--ph-a)"/><rect x="12" y="16" width="8" height="26" rx="3" fill="var(--ph-b)"/><rect x="16" y="42" width="36" height="9" rx="2.5" fill="var(--ph-b)"/><rect x="16" y="42" width="7" height="9" rx="2.5" fill="var(--ph-a)"/><rect x="27" y="24" width="18" height="2.6" rx="1.3" fill="#fff" opacity=".65"/><rect x="27" y="30" width="12" height="2.6" rx="1.3" fill="#fff" opacity=".65"/></symbol>
+<symbol id="ph-tablet" viewBox="0 0 64 64"><rect x="9" y="7" width="46" height="46" rx="6" fill="var(--ph-b)"/><rect x="13" y="11" width="38" height="38" rx="3" fill="var(--ph-a)"/><rect x="18" y="16" width="20" height="3" rx="1.5" fill="#fff" opacity=".7"/><rect x="18" y="22" width="28" height="3" rx="1.5" fill="#fff" opacity=".45"/><rect x="18" y="28" width="22" height="3" rx="1.5" fill="#fff" opacity=".45"/><circle cx="32" cy="50" r="1.8" fill="#fff" opacity=".8"/></symbol>
+<symbol id="ph-lamp" viewBox="0 0 64 64"><path d="M19 15h26l-7 18H26z" fill="var(--ph-a)"/><rect x="30" y="33" width="4" height="17" rx="2" fill="var(--ph-b)"/><rect x="21" y="49" width="22" height="5" rx="2.5" fill="var(--ph-b)"/><circle cx="32" cy="12" r="2.6" fill="var(--ph-b)"/></symbol>
+<symbol id="ph-box" viewBox="0 0 64 64"><rect x="12" y="23" width="40" height="25" rx="3" fill="var(--ph-a)"/><rect x="12" y="18" width="40" height="8" rx="3" fill="var(--ph-b)"/><rect x="28" y="27" width="8" height="8" rx="2" fill="var(--ph-b)"/></symbol>
+<symbol id="ph-chair" viewBox="0 0 64 64"><rect x="18" y="10" width="28" height="24" rx="4" fill="var(--ph-a)"/><rect x="14" y="32" width="36" height="9" rx="3" fill="var(--ph-b)"/><rect x="18" y="41" width="5" height="14" rx="2" fill="var(--ph-b)"/><rect x="41" y="41" width="5" height="14" rx="2" fill="var(--ph-b)"/></symbol>
+<symbol id="ph-bike" viewBox="0 0 64 64"><circle cx="17" cy="42" r="10" fill="none" stroke="var(--ph-a)" stroke-width="4"/><circle cx="47" cy="42" r="10" fill="none" stroke="var(--ph-a)" stroke-width="4"/><path d="M17 42l10-20h12l8 20M27 22h10M37 42H27" fill="none" stroke="var(--ph-b)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<div class="statusbar">
+  <span class="sb-time">9:41</span>
+  <svg class="sb-icons" viewBox="0 0 78 14" aria-hidden="true">
+    <rect x="0" y="8" width="3" height="6" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/>
+    <path d="M27 4.5a10 10 0 0 1 12 0M29.5 7.5a6.5 6.5 0 0 1 7 0M32.5 10.5a2.6 2.6 0 0 1 1 0" fill="none" stroke="#1E3326" stroke-width="1.5" stroke-linecap="round"/>
+    <rect x="50" y="1.5" width="22" height="11" rx="3" fill="none" stroke="#1E3326" stroke-width="1.2"/><rect x="52" y="3.5" width="16" height="7" rx="1.5"/><rect x="73" y="5" width="2" height="4" rx="1"/>
+  </svg>
+</div>
+
+<div class="head">
+  <h1>今天想淘点什么？</h1>
+  <p>校内 <span class="count">1,284</span> 件闲置在等你 · 主校区</p>
+</div>
+
+<div class="searchbox">
+  <a class="searchfield" href="home-b.html"><svg><use href="#i-search"/></svg>搜一搜：考研数学、台灯、收纳箱</a>
+  <a class="searchbtn" href="home-b.html" aria-label="搜索"><svg><use href="#i-arrow"/></svg></a>
+</div>
+
+<nav class="cats" aria-label="分类">
+  <a class="cat" href="home-b.html"><span class="bubble" style="background:#E3EFDB;color:#3F7A4B"><svg><use href="#i-book"/></svg></span>教材书籍</a>
+  <a class="cat" href="home-b.html"><span class="bubble" style="background:#DCEDEF;color:#3C7885"><svg><use href="#i-phone"/></svg></span>数码电子</a>
+  <a class="cat" href="home-b.html"><span class="bubble" style="background:#F5EAD3;color:#A8762F"><svg><use href="#i-cup"/></svg></span>生活日用</a>
+  <a class="cat" href="home-b.html"><span class="bubble" style="background:#F1E2E6;color:#9B5C6E"><svg><use href="#i-shirt"/></svg></span>服饰鞋包</a>
+  <a class="cat" href="home-b.html"><span class="bubble" style="background:#E6EDD9;color:#63803E"><svg><use href="#i-ball"/></svg></span>运动户外</a>
+  <a class="cat" href="home-b.html"><span class="bubble" style="background:#E5E7F1;color:#5B6496"><svg><use href="#i-pen"/></svg></span>文具乐器</a>
+  <a class="cat" href="home-b.html"><span class="bubble" style="background:#EFE5D6;color:#8A6A3E"><svg><use href="#i-bed"/></svg></span>宿舍家具</a>
+  <a class="cat" href="home-b.html"><span class="bubble" style="background:#E9EBE6;color:#657266"><svg><use href="#i-dots"/></svg></span>全部分类</a>
+</nav>
+
+<div class="strip"></div>
+
+<div class="filters">
+  <a class="chip on" href="home-b.html">综合</a>
+  <a class="chip" href="home-b.html">最新发布</a>
+  <a class="chip" href="home-b.html">价格从低到高</a>
+  <a class="chip" href="home-b.html">同校区</a>
+</div>
+
+<div class="sechead"><h2>为你推荐</h2><span class="meta">每日 08:00 更新</span></div>
+
+<div class="flow">
+  <a class="card" href="home-b.html">
+    <div class="ph" style="height:158px;--ph-bg:#E4EAD4;--ph-a:#6E8F6A;--ph-b:#C08237"><span class="badge">毕业甩卖</span><svg class="ph-art"><use href="#ph-book"/></svg></div>
+    <div class="body"><div class="ttl">高等数学 第七版 上下册 + 课后答案</div><div class="row"><span class="price"><small>¥</small>25</span><span class="cond">九成新</span></div><div class="who">张同学 · 主校区</div></div>
+  </a>
+  <a class="card" href="home-b.html">
+    <div class="ph" style="height:132px;--ph-bg:#DDE7E9;--ph-a:#5C8A94;--ph-b:#334F57"><svg class="ph-art"><use href="#ph-tablet"/></svg></div>
+    <div class="body"><div class="ttl">iPad Air 5 64G 深空灰 + 二代 pencil</div><div class="row"><span class="price"><small>¥</small>2280</span><span class="cond">95 新</span></div><div class="who">李同学 · 东校区</div></div>
+  </a>
+  <a class="card" href="home-b.html">
+    <div class="ph" style="height:146px;--ph-bg:#EFE6D2;--ph-a:#C99B54;--ph-b:#7A6437"><svg class="ph-art"><use href="#ph-lamp"/></svg></div>
+    <div class="body"><div class="ttl">小米台灯 1S 护眼暖光，宿舍神器</div><div class="row"><span class="price"><small>¥</small>59</span><span class="cond">九成新</span></div><div class="who">王同学 · 主校区</div></div>
+  </a>
+  <a class="card" href="home-b.html">
+    <div class="ph" style="height:170px;--ph-bg:#E6E9DA;--ph-a:#87A06C;--ph-b:#4E6440"><svg class="ph-art"><use href="#ph-box"/></svg></div>
+    <div class="body"><div class="ttl">宿舍收纳箱 3 个一起出，搬宿舍用不上了</div><div class="row"><span class="price"><small>¥</small>20</span><span class="cond">八成新</span></div><div class="who">陈同学 · 主校区</div></div>
+  </a>
+  <a class="card" href="home-b.html">
+    <div class="ph" style="height:136px;--ph-bg:#EFE7DB;--ph-a:#A98557;--ph-b:#6E5537"><svg class="ph-art"><use href="#ph-chair"/></svg></div>
+    <div class="body"><div class="ttl">懒人沙发，可自提</div><div class="row"><span class="price"><small>¥</small>45</span><span class="cond">八成新</span></div><div class="who">周同学 · 南校区</div></div>
+  </a>
+  <a class="card" href="home-b.html">
+    <div class="ph" style="height:152px;--ph-bg:#DEE9E2;--ph-a:#568B72;--ph-b:#2F5B48"><svg class="ph-art"><use href="#ph-bike"/></svg></div>
+    <div class="body"><div class="ttl">捷安特通勤单车，链条刚换，可小刀</div><div class="row"><span class="price"><small>¥</small>380</span><span class="cond">七成新</span></div><div class="who">赵同学 · 主校区</div></div>
+  </a>
+</div>
+
+<div class="home-indicator"></div>
+<nav class="tabbar" aria-label="底部导航">
+  <a class="tab active" href="home-b.html"><svg class="ti"><use href="#i-home"/></svg><span>首页</span></a>
+  <a class="tab tab-pub" href="home-b.html"><span class="pub"><svg><use href="#i-plus"/></svg></span><span>发布</span></a>
+  <a class="tab" href="home-b.html"><svg class="ti"><use href="#i-chat"/></svg><span>消息</span></a>
+  <a class="tab" href="home-b.html"><svg class="ti"><use href="#i-user"/></svg><span>我的</span></a>
+</nav>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-layout="grid">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>我的 · 青柠集</title>
+<script src="icons.js"></script>
+<script src="data.js"></script>
+<script src="store.js"></script>
+<script src="shell.js"></script>
+<script src="app.js"></script>
+<style>
+.profilehead{display:flex;align-items:center;gap:var(--sp-4);padding:var(--sp-6) var(--sp-5) var(--sp-5)}
+.profilehead .info{flex:1;min-width:0}
+.profilehead .info b{font-size:var(--fs-20);font-weight:700;display:block}
+.profilehead .info small{font-size:var(--fs-12);color:var(--muted)}
+.profilehead .edit{width:44px;height:44px;border-radius:50%;background:var(--surface-2);
+  display:grid;place-items:center;color:var(--muted)}
+.profilehead .edit svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.stats{display:flex;margin:0 var(--sp-5) var(--sp-5);background:var(--surface);border-radius:var(--radius-md);
+  border:1px solid var(--line);padding:var(--sp-4) 0}
+.stats a{flex:1;text-align:center;border-right:1px solid var(--line)}
+.stats a:last-child{border-right:none}
+.stats b{font-size:var(--fs-20);font-weight:700;color:var(--primary-deep);display:block}
+.stats small{font-size:var(--fs-12);color:var(--muted)}
+.sectitle{font-size:var(--fs-12);color:var(--muted);padding:var(--sp-4) var(--sp-5) var(--sp-2)}
+.listrow .ic{background:var(--surface-2);color:var(--primary-deep)}
+.about{margin:var(--sp-5);padding:var(--sp-4);border-radius:var(--radius-md);background:var(--surface-2);
+  font-size:var(--fs-12);color:var(--muted);line-height:1.7}
+</style>
+</head>
+<body data-page="profile" data-active="profile">
+
+<div class="profilehead">
+  <span class="avatar lg">我</span>
+  <div class="info"><b>我</b><small>主校区 · 校内认证学生</small></div>
+  <a class="edit" href="settings.html" aria-label="设置"><svg viewBox="0 0 24 24"><use href="#i-gear"/></svg></a>
+</div>
+
+<div class="stats">
+  <a href="my-posts.html"><b id="postcount">0</b><small>我的发布</small></a>
+  <a href="favorites.html"><b id="favcount">0</b><small>我的收藏</small></a>
+  <a href="messages.html"><b id="msgcount">0</b><small>消息</small></a>
+</div>
+
+<div class="sectitle">我的交易</div>
+<div class="listgroup">
+  <a class="listrow" href="my-posts.html"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-tag"/></svg></span>
+    <span class="tx"><b>我的发布</b><small>管理已上架 / 已下架的闲置</small></span><svg class="chev" viewBox="0 0 24 24"><use href="#i-chev"/></svg></a>
+  <a class="listrow" href="favorites.html"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg></span>
+    <span class="tx"><b>我的收藏</b><small>看看之前心动的商品</small></span><svg class="chev" viewBox="0 0 24 24"><use href="#i-chev"/></svg></a>
+  <a class="listrow" href="messages.html"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-chat"/></svg></span>
+    <span class="tx"><b>消息</b><small>和买家的咨询会话</small></span><svg class="chev" viewBox="0 0 24 24"><use href="#i-chev"/></svg></a>
+</div>
+
+<div class="sectitle">其他</div>
+<div class="listgroup">
+  <a class="listrow" href="settings.html"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-gear"/></svg></span>
+    <span class="tx"><b>设置</b><small>校区、通知与演示数据</small></span><svg class="chev" viewBox="0 0 24 24"><use href="#i-chev"/></svg></a>
+</div>
+
+<div class="about">青柠集 · 校园二手交易平台课程设计 Demo<br>全部数据保存在本机浏览器（localStorage），不涉及真实支付、物流与用户体系。</div>
+
+</body>
+</html>

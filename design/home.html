@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-layout="grid">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>首页 · 青柠集</title>
+<script src="icons.js"></script>
+<script src="data.js"></script>
+<script src="store.js"></script>
+<script src="shell.js"></script>
+<script src="app.js"></script>
+<style>
+/* 首页特有：刷新提示条 */
+.pullhint{display:flex;align-items:center;justify-content:center;gap:6px;padding:6px 0 0;
+  font-size:var(--fs-12);color:var(--muted)}
+.pullhint svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.pullhint a{color:var(--primary-deep);font-weight:600}
+</style>
+</head>
+<body data-page="home" data-active="home">
+
+<div class="pagehead">
+  <h1>今天想淘点什么？</h1>
+  <p>校内 <span class="hl" id="count">0</span> 件闲置在等你 · 主校区</p>
+</div>
+
+<div class="searchbox">
+  <a class="searchfield" href="search.html"><svg class="ti-sm" viewBox="0 0 24 24"><use href="#i-search"/></svg><span>搜一搜：考研数学、台灯、收纳箱</span></a>
+  <a class="searchbtn" href="search.html" aria-label="搜索"><svg viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
+</div>
+
+<nav class="cats" id="cats" aria-label="分类"></nav>
+
+<div class="strip"></div>
+
+<div class="chips" id="quickchips">
+  <a class="chip on" href="category.html">全部商品</a>
+  <a class="chip" href="category.html?cat=教材">教材专区</a>
+  <a class="chip" href="category.html?sort=最新">最新发布</a>
+  <a class="chip" href="category.html?price=50">50 元以内</a>
+  <a class="chip" href="category.html?cat=家具">毕业甩卖</a>
+</div>
+
+<div class="sechead">
+  <h2>为你推荐</h2>
+  <span class="meta">每日 08:00 更新</span>
+</div>
+
+<div class="pullhint" id="refresh">
+  <svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>
+  <span>下拉刷新 · <a href="category.html">更多筛选</a></span>
+</div>
+
+<div class="flow" id="flow"></div>
+<div class="endnote" id="endnote">— 上拉加载更多 —</div>
+
+</body>
+</html>

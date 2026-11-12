@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-layout="grid">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>分类 · 青柠集</title>
+<script src="icons.js"></script>
+<script src="data.js"></script>
+<script src="store.js"></script>
+<script src="shell.js"></script>
+<script src="app.js"></script>
+<style>
+.catbar{display:flex;gap:var(--sp-3);padding:var(--sp-4) var(--sp-5);overflow-x:auto;scrollbar-width:none}
+.catbar::-webkit-scrollbar{display:none}
+.catbar a{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-size:var(--fs-12);color:var(--muted);min-width:44px}
+.catbar a .bubble{width:48px;height:48px;border-radius:16px;display:grid;place-items:center}
+.catbar a .bubble svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.catbar a.on{color:var(--primary-deep);font-weight:700}
+.catbar a.on .bubble{outline:2px solid var(--primary);outline-offset:2px}
+.filterlabel{font-size:var(--fs-12);color:var(--muted);padding:var(--sp-2) var(--sp-5) 0}
+</style>
+</head>
+<body data-page="category" data-active="home" data-tabbar="none">
+
+<div class="topnav">
+  <a class="iconbtn" href="home.html" aria-label="返回"><svg class="ti" viewBox="0 0 24 24"><use href="#i-back"/></svg></a>
+  <h1>分类筛选</h1>
+  <a class="iconbtn" href="search.html" aria-label="搜索"><svg class="ti" viewBox="0 0 24 24"><use href="#i-search"/></svg></a>
+</div>
+
+<nav class="catbar" id="catbar" aria-label="商品分类"></nav>
+
+<div class="filterlabel">分类</div>
+<div class="chips" id="catchips">
+  <a class="chip on" href="#" data-cat="全部">全部</a>
+  <a class="chip" href="#" data-cat="教材">教材</a>
+  <a class="chip" href="#" data-cat="电子">电子</a>
+  <a class="chip" href="#" data-cat="生活">生活</a>
+  <a class="chip" href="#" data-cat="服饰">服饰</a>
+  <a class="chip" href="#" data-cat="运动">运动</a>
+  <a class="chip" href="#" data-cat="文具">文具</a>
+  <a class="chip" href="#" data-cat="家具">家具</a>
+  <a class="chip" href="#" data-cat="其他">其他</a>
+</div>
+
+<div class="filterlabel">排序</div>
+<div class="chips" id="sortchips">
+  <a class="chip on" href="#" data-sort="综合">综合</a>
+  <a class="chip" href="#" data-sort="最新">最新发布</a>
+  <a class="chip" href="#" data-sort="价格">价格从低到高</a>
+</div>
+
+<div class="filterlabel">价格</div>
+<div class="chips" id="pricechips">
+  <a class="chip on" href="#" data-price="0">不限</a>
+  <a class="chip" href="#" data-price="30">30 元以内</a>
+  <a class="chip" href="#" data-price="50">50 元以内</a>
+  <a class="chip" href="#" data-price="100">100 元以内</a>
+  <a class="chip" href="#" data-price="500">500 元以内</a>
+</div>
+
+<div class="sechead"><h2>筛选结果</h2><span class="meta">共 <span id="rescount">0</span> 件</span></div>
+<div class="results" id="results"></div>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>方向 C · 清新自然</title>
+<style>
+:root{
+  --bg:#FAF8F0; --surface:#FFFFFF; --surface-2:#F0EDE0;
+  --ink:#1B2B22; --muted:#5B6857; --line:#E8E4D5;
+  --primary:#3D7A52; --accent:#8E5222; --on-primary:#FFFFFF;
+  --font:"PingFang SC","HarmonyOS Sans SC","MiSans","Microsoft YaHei",system-ui,sans-serif;
+  --font-display:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
+  --r-sm:6px; --r-md:12px; --r-lg:18px; --r-pill:999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding-bottom:calc(83px + 16px)}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ti{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+
+.statusbar{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:sticky;top:0;z-index:20;background:var(--bg)}
+.sb-time{font-size:16px;font-weight:600;letter-spacing:.02em}
+.sb-icons{width:78px;height:14px;fill:var(--ink)}
+
+.masthead{padding:14px 20px 18px;display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--line)}
+.masthead .kicker{font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+.masthead h1{font-family:var(--font-display);font-size:32px;font-weight:700;line-height:1.15;letter-spacing:.02em}
+.masthead .sub{font-size:12px;color:var(--muted);margin-top:8px}
+.masthead .issue{font-family:var(--font-display);font-size:14px;color:var(--muted);text-align:right;line-height:1.6;white-space:nowrap}
+
+.searchline{padding:14px 20px}
+.searchline .bar{height:46px;display:flex;align-items:center;gap:9px;border-bottom:1.5px solid var(--ink);padding:0 2px}
+.searchline svg{width:19px;height:19px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round}
+.searchline .ph-txt{font-size:14px;color:var(--muted);flex:1}
+.searchline .go{font-size:12px;font-weight:600;color:var(--primary)}
+
+.catrail{display:flex;gap:22px;overflow-x:auto;padding:0 20px 14px;scrollbar-width:none;border-bottom:1px solid var(--line)}
+.catrail::-webkit-scrollbar{display:none}
+.catrail a{flex:0 0 auto;font-size:14px;color:var(--muted);white-space:nowrap;padding:4px 10px;min-height:44px;min-width:44px;justify-content:center;display:inline-flex;align-items:center}
+.catrail a.on{color:var(--ink);font-weight:700;border-bottom:2px solid var(--primary)}
+
+.issuebar{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 12px}
+.issuebar .label{font-family:var(--font-display);font-size:20px;font-weight:700}
+.issuebar .rule{flex:1;height:1px;background:var(--line);margin:0 12px}
+.issuebar .num{font-size:12px;color:var(--muted);letter-spacing:.1em}
+
+/* 编辑式大图条目 */
+.story{padding:0 20px 22px}
+.story .ph{height:212px;border-radius:var(--r-md);position:relative;overflow:hidden;display:grid;place-items:center;background:var(--ph-bg)}
+.story .ph::before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:#fff;opacity:.26;right:-50px;top:-50px}
+.ph-art{width:50%;height:50%;position:relative;z-index:1}
+.story .eyebrow{font-size:12px;letter-spacing:.12em;color:var(--accent);margin-top:14px}
+.story h2{font-family:var(--font-display);font-size:24px;font-weight:700;line-height:1.35;margin-top:6px}
+.story .desc{font-size:14px;color:var(--muted);line-height:1.7;margin-top:8px}
+.story .byline{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;color:var(--muted)}
+.story .avatar{width:24px;height:24px;border-radius:50%;background:var(--primary);display:grid;place-items:center;color:#fff;font-size:12px;font-weight:600}
+.story .price{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--primary);margin-left:auto;white-space:nowrap}
+.story .price small{font-size:12px}
+
+.divider{height:1px;background:var(--line);margin:0 20px}
+
+/* 横向列表 */
+.list{padding:6px 20px 0}
+.item{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.item .ph{width:92px;height:92px;flex:0 0 92px;border-radius:var(--r-sm);position:relative;overflow:hidden;display:grid;place-items:center;background:var(--ph-bg)}
+.item .ph-art{width:62%;height:62%}
+.item .info{flex:1;min-width:0}
+.item .no{font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.item .ttl{font-family:var(--font-display);font-size:16px;font-weight:600;line-height:1.45;margin-top:4px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.item .meta{font-size:12px;color:var(--muted);margin-top:7px}
+.item .price{font-size:20px;font-weight:700;color:var(--primary);white-space:nowrap;align-self:flex-end}
+.item .price small{font-size:12px}
+
+.endnote{text-align:center;font-size:12px;color:var(--muted);padding:26px 20px 10px;letter-spacing:.06em}
+
+.tabbar{position:fixed;left:0;right:0;bottom:0;height:83px;padding:0 8px 34px;display:flex;align-items:flex-start;background:var(--surface);border-top:1px solid var(--line);z-index:30}
+.tab{flex:1;height:49px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px;color:var(--muted)}
+.tab.active{color:var(--primary);font-weight:600}
+.tab-pub{justify-content:flex-start;gap:2px}
+.tab-pub .pub{width:44px;height:44px;margin-top:-16px;border-radius:50%;background:var(--primary);display:grid;place-items:center;box-shadow:0 6px 16px rgba(61,122,82,.28)}
+.tab-pub .pub svg{width:24px;height:24px;fill:none;stroke:var(--on-primary);stroke-width:2;stroke-linecap:round}
+.home-indicator{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:999px;background:var(--ink);opacity:.82;z-index:31}
+</style>
+</head>
+<body>
+
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 15a3 3 0 0 1-3 3H8l-4 3V6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3z"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21a8 8 0 0 1 16 0"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM21 21l-4.3-4.3"/></symbol>
+<symbol id="ph-book" viewBox="0 0 64 64"><rect x="12" y="16" width="40" height="26" rx="3" fill="var(--ph-a)"/><rect x="12" y="16" width="8" height="26" rx="3" fill="var(--ph-b)"/><rect x="16" y="42" width="36" height="9" rx="2.5" fill="var(--ph-b)"/><rect x="16" y="42" width="7" height="9" rx="2.5" fill="var(--ph-a)"/><rect x="27" y="24" width="18" height="2.6" rx="1.3" fill="#fff" opacity=".65"/><rect x="27" y="30" width="12" height="2.6" rx="1.3" fill="#fff" opacity=".65"/></symbol>
+<symbol id="ph-tablet" viewBox="0 0 64 64"><rect x="9" y="7" width="46" height="46" rx="6" fill="var(--ph-b)"/><rect x="13" y="11" width="38" height="38" rx="3" fill="var(--ph-a)"/><rect x="18" y="16" width="20" height="3" rx="1.5" fill="#fff" opacity=".7"/><rect x="18" y="22" width="28" height="3" rx="1.5" fill="#fff" opacity=".45"/><rect x="18" y="28" width="22" height="3" rx="1.5" fill="#fff" opacity=".45"/><circle cx="32" cy="50" r="1.8" fill="#fff" opacity=".8"/></symbol>
+<symbol id="ph-lamp" viewBox="0 0 64 64"><path d="M19 15h26l-7 18H26z" fill="var(--ph-a)"/><rect x="30" y="33" width="4" height="17" rx="2" fill="var(--ph-b)"/><rect x="21" y="49" width="22" height="5" rx="2.5" fill="var(--ph-b)"/><circle cx="32" cy="12" r="2.6" fill="var(--ph-b)"/></symbol>
+<symbol id="ph-box" viewBox="0 0 64 64"><rect x="12" y="23" width="40" height="25" rx="3" fill="var(--ph-a)"/><rect x="12" y="18" width="40" height="8" rx="3" fill="var(--ph-b)"/><rect x="28" y="27" width="8" height="8" rx="2" fill="var(--ph-b)"/></symbol>
+<symbol id="ph-chair" viewBox="0 0 64 64"><rect x="18" y="10" width="28" height="24" rx="4" fill="var(--ph-a)"/><rect x="14" y="32" width="36" height="9" rx="3" fill="var(--ph-b)"/><rect x="18" y="41" width="5" height="14" rx="2" fill="var(--ph-b)"/><rect x="41" y="41" width="5" height="14" rx="2" fill="var(--ph-b)"/></symbol>
+</defs></svg>
+
+<div class="statusbar">
+  <span class="sb-time">9:41</span>
+  <svg class="sb-icons" viewBox="0 0 78 14" aria-hidden="true">
+    <rect x="0" y="8" width="3" height="6" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/>
+    <path d="M27 4.5a10 10 0 0 1 12 0M29.5 7.5a6.5 6.5 0 0 1 7 0M32.5 10.5a2.6 2.6 0 0 1 1 0" fill="none" stroke="#1B2B22" stroke-width="1.5" stroke-linecap="round"/>
+    <rect x="50" y="1.5" width="22" height="11" rx="3" fill="none" stroke="#1B2B22" stroke-width="1.2"/><rect x="52" y="3.5" width="16" height="7" rx="1.5"/><rect x="73" y="5" width="2" height="4" rx="1"/>
+  </svg>
+</div>
+
+<div class="masthead">
+  <div>
+    <div class="kicker">CAMPUS SECONDHAND</div>
+    <h1>青柠集<br>校园闲置刊物</h1>
+    <div class="sub">主校区 · 每周三更新</div>
+  </div>
+  <div class="issue">第 03 期<br>2026 / 11 / 11</div>
+</div>
+
+<div class="searchline">
+  <a class="bar" href="home-c.html"><svg><use href="#i-search"/></svg><span class="ph-txt">搜索刊内好物</span><span class="go">搜索 →</span></a>
+</div>
+
+<nav class="catrail" aria-label="分类">
+  <a class="on" href="home-c.html">全部</a>
+  <a href="home-c.html">教材书籍</a>
+  <a href="home-c.html">数码电子</a>
+  <a href="home-c.html">生活日用</a>
+  <a href="home-c.html">宿舍家具</a>
+  <a href="home-c.html">其他</a>
+</nav>
+
+<div class="issuebar"><span class="label">本期封面</span><span class="rule"></span><span class="num">NO. 01</span></div>
+
+<a class="story" href="home-c.html">
+  <div class="ph" style="--ph-bg:#E2E9D5;--ph-a:#668B62;--ph-b:#C08237"><svg class="ph-art"><use href="#ph-book"/></svg></div>
+  <div class="eyebrow">毕业季特辑 / 教材</div>
+  <h2>一套高数，传了三届人</h2>
+  <p class="desc">从大一用到考研，书角有点卷，但笔记工整。张同学说，希望能留在主校区，别被卖去废纸站。</p>
+  <div class="byline"><span class="avatar">张</span>张同学 · 主校区 · 2 小时前<span class="price"><small>¥</small>25</span></div>
+</a>
+
+<div class="divider"></div>
+
+<div class="issuebar"><span class="label">本期条目</span><span class="rule"></span><span class="num">04 件</span></div>
+
+<div class="list">
+  <a class="item" href="home-c.html">
+    <div class="ph" style="--ph-bg:#DDE7E9;--ph-a:#5C8A94;--ph-b:#334F57"><svg class="ph-art"><use href="#ph-tablet"/></svg></div>
+    <div class="info"><div class="no">NO. 02 / 数码</div><div class="ttl">iPad Air 5 64G 深空灰 + 二代 pencil</div><div class="meta">李同学 · 东校区 · 95 新</div></div>
+    <span class="price"><small>¥</small>2280</span>
+  </a>
+  <a class="item" href="home-c.html">
+    <div class="ph" style="--ph-bg:#EFE6D2;--ph-a:#C99B54;--ph-b:#7A6437"><svg class="ph-art"><use href="#ph-lamp"/></svg></div>
+    <div class="info"><div class="no">NO. 03 / 日用</div><div class="ttl">小米台灯 1S 护眼暖光，宿舍神器</div><div class="meta">王同学 · 主校区 · 九成新</div></div>
+    <span class="price"><small>¥</small>59</span>
+  </a>
+  <a class="item" href="home-c.html">
+    <div class="ph" style="--ph-bg:#E6E9DA;--ph-a:#87A06C;--ph-b:#4E6440"><svg class="ph-art"><use href="#ph-box"/></svg></div>
+    <div class="info"><div class="no">NO. 04 / 家具</div><div class="ttl">宿舍收纳箱 3 个一起出</div><div class="meta">陈同学 · 主校区 · 八成新</div></div>
+    <span class="price"><small>¥</small>20</span>
+  </a>
+  <a class="item" href="home-c.html">
+    <div class="ph" style="--ph-bg:#EFE7DB;--ph-a:#A98557;--ph-b:#6E5537"><svg class="ph-art"><use href="#ph-chair"/></svg></div>
+    <div class="info"><div class="no">NO. 05 / 家具</div><div class="ttl">懒人沙发，可自提</div><div class="meta">周同学 · 南校区 · 八成新</div></div>
+    <span class="price"><small>¥</small>45</span>
+  </a>
+</div>
+
+<div class="endnote">— 下期周三见 · 上拉可加载往期 —</div>
+
+<div class="home-indicator"></div>
+<nav class="tabbar" aria-label="底部导航">
+  <a class="tab active" href="home-c.html"><svg class="ti"><use href="#i-home"/></svg><span>首页</span></a>
+  <a class="tab tab-pub" href="home-c.html"><span class="pub"><svg><use href="#i-plus"/></svg></span><span>发布</span></a>
+  <a class="tab" href="home-c.html"><svg class="ti"><use href="#i-chat"/></svg><span>消息</span></a>
+  <a class="tab" href="home-c.html"><svg class="ti"><use href="#i-user"/></svg><span>我的</span></a>
+</nav>
+</body>
+</html>

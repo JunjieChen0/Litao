@@ -1,0 +1,13 @@
+{
+  "tweaks": [
+    { "id":"density", "label":"留白", "var":"--density", "min":0.8, "max":1.4, "step":0.05, "value":1,
+      "note":"卡片内边距与区块留白的倍数" },
+    { "id":"radius", "label":"圆角", "var":"--radius-md", "min":0, "max":24, "unit":"px", "value":16,
+      "note":"卡片与按钮的统一圆角" },
+    { "id":"brand", "label":"主色", "var":"--color-primary", "type":"color", "value":"#3C7A48",
+      "note":"关键操作与当前导航项的颜色" },
+    { "id":"layout", "label":"商品排法", "attr":"data-layout", "value":"grid",
+      "options":[{"label":"两列","value":"grid"},{"label":"单列大图","value":"list"}],
+      "note":"首页与列表的商品排列方式" }
+  ]
+}

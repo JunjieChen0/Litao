@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-layout="grid">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>搜索 · 青柠集</title>
+<script src="icons.js"></script>
+<script src="data.js"></script>
+<script src="store.js"></script>
+<script src="shell.js"></script>
+<script src="app.js"></script>
+<style>
+/* 搜索页特有 */
+.searchbar{padding:14px var(--sp-5) 0}
+.searchbar .bar{height:48px;display:flex;align-items:center;gap:var(--sp-2);background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--radius-pill);padding:0 var(--sp-4);box-shadow:var(--shadow-1)}
+.searchbar svg{width:19px;height:19px;flex:0 0 auto;fill:none;stroke:var(--primary);stroke-width:1.9;stroke-linecap:round}
+.searchbar input{flex:1;min-width:0;height:44px;border:none;outline:none;background:transparent}
+.searchbar .go{height:48px;display:inline-flex;align-items:center;padding:0 var(--sp-4);border-radius:var(--radius-pill);
+  background:var(--btn-primary);color:var(--on-primary);font-size:var(--fs-14);font-weight:600;flex:0 0 auto}
+.sec{margin-top:var(--sp-5)}
+.sec h2{font-size:var(--fs-14);font-weight:700;padding:0 var(--sp-5) var(--sp-3);display:flex;justify-content:space-between;align-items:center}
+.sec h2 small{font-size:var(--fs-12);color:var(--muted);font-weight:400}
+.chiprow{display:flex;flex-wrap:wrap;gap:var(--sp-2);padding:0 var(--sp-5)}
+.reshead{padding:var(--sp-5) var(--sp-5) var(--sp-3);font-size:var(--fs-14);font-weight:700}
+.reshead span{color:var(--primary-deep)}
+</style>
+</head>
+<body data-page="search" data-active="home" data-tabbar="none">
+
+<div class="topnav">
+  <a class="iconbtn" href="home.html" aria-label="返回"><svg class="ti" viewBox="0 0 24 24"><use href="#i-back"/></svg></a>
+  <h1>搜索</h1>
+  <span class="spacer"></span>
+</div>
+
+<div class="searchbar">
+  <div class="bar">
+    <svg viewBox="0 0 24 24"><use href="#i-search"/></svg>
+    <input id="kw" type="search" placeholder="搜教材、搜数码、搜宿舍好物" autocomplete="off">
+    <a class="go" href="#" id="go">搜索</a>
+  </div>
+</div>
+
+<div class="sec">
+  <h2>搜索历史 <small>本地保存</small></h2>
+  <div class="chiprow" id="history"></div>
+</div>
+
+<div class="sec">
+  <h2>大家都在搜</h2>
+  <div class="chiprow" id="hot"></div>
+</div>
+
+<div class="reshead" id="reshead">全部商品</div>
+<div class="sechead" style="padding-top:0"><span class="meta">找到 <span id="rescount">0</span> 件</span></div>
+<div class="results" id="result"></div>
+
+</body>
+</html>

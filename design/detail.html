@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-layout="grid">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>商品详情 · 青柠集</title>
+<script src="icons.js"></script>
+<script src="data.js"></script>
+<script src="store.js"></script>
+<script src="shell.js"></script>
+<script src="app.js"></script>
+<style>
+/* 详情页特有 */
+.gallery{position:relative}
+.gallery .ph{height:300px;border-radius:0}
+.gallery .ph-art{width:46%;height:46%}
+.dots{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:6px}
+.dots span{width:6px;height:6px;border-radius:999px;background:rgba(255,255,255,.55)}
+.dots span.on{width:18px;background:#fff}
+.gcount{position:absolute;right:16px;bottom:12px;background:rgba(20,40,26,.82);color:#fff;
+  font-size:var(--fs-12);padding:3px 10px;border-radius:999px}
+.dbody{padding:var(--sp-5)}
+.dhead{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3)}
+.dhead .price{font-size:var(--fs-28)}
+.dtitle{font-size:var(--fs-20);font-weight:700;line-height:1.4;margin-top:var(--sp-3)}
+.dtags{display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-top:var(--sp-3)}
+.dsec{border-top:1px solid var(--line);margin-top:var(--sp-5);padding-top:var(--sp-4)}
+.dsec h2{font-size:var(--fs-16);font-weight:700;margin-bottom:var(--sp-3)}
+.dsec p{font-size:var(--fs-14);color:var(--muted);line-height:1.7;overflow-wrap:anywhere}
+.kv{display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-size:var(--fs-14);
+  border-bottom:1px dashed var(--line)}
+.kv:last-child{border-bottom:none}
+.kv span{color:var(--muted)}
+.kv b{font-weight:600}
+.sellerbox{display:flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-5);padding:var(--sp-4);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md)}
+.sellerbox .sinfo{flex:1;min-width:0}
+.sellerbox .sinfo b{font-size:var(--fs-14);display:block}
+.sellerbox .sinfo small{font-size:var(--fs-12);color:var(--muted)}
+</style>
+</head>
+<body data-page="detail" data-tabbar="none">
+
+<div class="topnav">
+  <a class="iconbtn" href="home.html" aria-label="返回"><svg class="ti" viewBox="0 0 24 24"><use href="#i-back"/></svg></a>
+  <h1>商品详情</h1>
+  <a class="iconbtn" href="search.html" aria-label="搜索"><svg class="ti" viewBox="0 0 24 24"><use href="#i-search"/></svg></a>
+</div>
+
+<div id="detail"></div>
+
+<div class="actionbar">
+  <a class="iconact" id="fav" href="#"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><span>收藏</span></a>
+  <a class="iconact" href="messages.html"><svg viewBox="0 0 24 24"><use href="#i-chat"/></svg><span>消息</span></a>
+  <button class="btn btn-primary" id="contact">联系卖家</button>
+</div>
+
+</body>
+</html>

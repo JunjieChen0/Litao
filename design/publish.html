@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-layout="grid">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>发布闲置 · 青柠集</title>
+<script src="icons.js"></script>
+<script src="data.js"></script>
+<script src="store.js"></script>
+<script src="shell.js"></script>
+<script src="app.js"></script>
+<style>
+/* 发布页特有 */
+.uphint{font-size:var(--fs-12);color:var(--muted);margin-top:8px}
+.publish-note{margin:0 var(--sp-5) var(--sp-4);padding:var(--sp-3) var(--sp-4);background:var(--surface-2);
+  border-radius:var(--radius-sm);font-size:var(--fs-12);color:var(--muted);line-height:1.6}
+</style>
+</head>
+<body data-page="publish" data-active="publish" data-tabbar="none">
+
+<div class="topnav">
+  <a class="iconbtn" href="home.html" aria-label="返回"><svg class="ti" viewBox="0 0 24 24"><use href="#i-back"/></svg></a>
+  <h1>发布闲置</h1>
+  <span class="spacer"></span>
+</div>
+
+<form id="pubform" novalidate>
+  <div class="form">
+    <div class="field">
+      <label class="lb">商品图片 <span class="req">*</span></label>
+      <div class="uploader" id="thumbs"></div>
+      <p class="uphint">选一个示意图片，最多 6 张（Demo 用本地 SVG 占位）</p>
+    </div>
+
+    <div class="field">
+      <label class="lb" for="f-title">标题 <span class="req">*</span></label>
+      <input class="input" id="f-title" placeholder="例如：高等数学教材 第七版 九成新" maxlength="40">
+    </div>
+
+    <div class="field">
+      <label class="lb" for="f-price">价格 <span class="req">*</span></label>
+      <div class="price-input"><span>¥</span><input class="input" id="f-price" type="number" min="0" placeholder="0" inputmode="decimal"></div>
+    </div>
+
+    <div class="field">
+      <label class="lb" for="f-desc">描述 <span class="req">*</span></label>
+      <textarea class="textarea" id="f-desc" placeholder="说说成色、入手渠道、有没有笔记或配件，方便同学判断～" maxlength="200"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="lb">分类 <span class="req">*</span></label>
+      <div class="pillgroup" id="category">
+        <a class="pill on" href="#" data-v="教材">教材</a><a class="pill" href="#" data-v="电子">电子</a>
+        <a class="pill" href="#" data-v="生活">生活</a><a class="pill" href="#" data-v="家具">家具</a>
+        <a class="pill" href="#" data-v="服饰">服饰</a><a class="pill" href="#" data-v="运动">运动</a>
+        <a class="pill" href="#" data-v="文具">文具</a><a class="pill" href="#" data-v="其他">其他</a>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="lb">成色</label>
+      <div class="pillgroup" id="condition">
+        <a class="pill" href="#" data-v="全新">全新</a><a class="pill" href="#" data-v="几乎全新">几乎全新</a>
+        <a class="pill on" href="#" data-v="九成新">九成新</a><a class="pill" href="#" data-v="八成新">八成新</a>
+        <a class="pill" href="#" data-v="七成新">七成新</a>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="lb">交易方式</label>
+      <div class="pillgroup" id="trade">
+        <a class="pill on" href="#" data-v="面交">面交</a><a class="pill" href="#" data-v="自提">自提</a>
+        <a class="pill" href="#" data-v="可邮寄">可邮寄</a><a class="pill" href="#" data-v="可小刀">可小刀</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="publish-note">发布后商品会立刻出现在首页信息流和「我的发布」里；本 Demo 数据只保存在本机浏览器，不上传服务器。</div>
+  <div style="padding:0 20px 8px"><button class="btn btn-primary" type="submit">确认发布</button></div>
+</form>
+
+</body>
+</html>

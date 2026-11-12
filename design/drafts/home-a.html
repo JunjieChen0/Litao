@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="dsh-design" content="app">
+<title>方向 A · 清新自然</title>
+<style>
+:root{
+  --bg:#F5F2E6; --surface:#FFFDF6; --surface-2:#EDE8D6;
+  --ink:#22392A; --muted:#54654F; --line:#E3DECB;
+  --primary:#2E5A3C; --primary-soft:#DCE7D5; --accent:#C08237;
+  --on-primary:#F7F4E8;
+  --font:"PingFang SC","HarmonyOS Sans SC","MiSans","Microsoft YaHei",system-ui,sans-serif;
+  --font-display:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
+  --r-sm:8px; --r-md:14px; --r-lg:22px; --r-pill:999px;
+  --shadow:0 10px 28px rgba(34,57,42,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding-bottom:calc(83px + 16px)}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ti{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+
+/* 状态栏 */
+.statusbar{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:sticky;top:0;z-index:20;background:var(--bg)}
+.sb-time{font-size:16px;font-weight:600;letter-spacing:.02em}
+.sb-icons{width:78px;height:14px;fill:var(--ink)}
+
+/* 顶栏 */
+.topbar{height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+.brand{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:.04em}
+.brand .mark{width:28px;height:28px;border-radius:9px;background:var(--primary);display:grid;place-items:center}
+.brand .mark svg{width:17px;height:17px;fill:none;stroke:var(--on-primary);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.campus{display:flex;align-items:center;gap:4px;font-size:14px;color:var(--muted);min-height:44px;padding:0 4px}
+.campus svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* 搜索入口 */
+.searchline{padding:0 20px 16px}
+.search-pill{height:48px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:0 16px;color:var(--muted);font-size:14px}
+.search-pill svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.search-pill .go{margin-left:auto;display:flex;align-items:center;gap:2px;color:var(--primary);font-weight:600;font-size:14px}
+
+/* 大图海报 */
+.hero{margin:0 20px;border-radius:var(--r-lg);background:var(--primary);color:var(--on-primary);height:292px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero-art{position:absolute;right:-14px;bottom:-16px;width:290px;height:200px}
+.hero-copy{position:relative;z-index:2;padding:26px 22px;max-width:230px}
+.hero-kicker{display:inline-block;font-size:12px;letter-spacing:.16em;opacity:.78;margin-bottom:14px}
+.hero-title{font-family:var(--font-display);font-size:32px;line-height:1.28;font-weight:700;letter-spacing:.01em}
+.hero-sub{font-size:14px;opacity:.8;margin-top:12px}
+.hero-btn{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 18px;margin-top:20px;border-radius:var(--r-pill);background:var(--on-primary);color:var(--primary);font-size:14px;font-weight:600}
+.hero-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* 专区横滑 */
+.zonerow{display:flex;gap:10px;overflow-x:auto;padding:18px 20px 4px;scrollbar-width:none}
+.zonerow::-webkit-scrollbar{display:none}
+.zone{flex:0 0 auto;height:44px;display:inline-flex;align-items:center;gap:7px;padding:0 16px;border-radius:var(--r-pill);border:1px solid var(--line);background:var(--surface);font-size:14px;white-space:nowrap}
+.zone svg{width:16px;height:16px;fill:none;stroke:var(--primary);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.zone.hot{background:var(--primary-soft);border-color:transparent;color:var(--primary);font-weight:600}
+
+/* 区块标题 */
+.sechead{display:flex;align-items:baseline;justify-content:space-between;padding:28px 20px 14px}
+.sechead h2{font-family:var(--font-display);font-size:24px;font-weight:700;letter-spacing:.02em}
+.sechead .meta{font-size:12px;color:var(--muted)}
+.sechead .more{display:inline-flex;align-items:center;gap:2px;font-size:12px;color:var(--muted);min-height:44px}
+
+/* 插画占位 */
+.ph{background:var(--ph-bg,#E9EDDC);border-radius:var(--r-md);position:relative;overflow:hidden;display:grid;place-items:center}
+.ph::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;background:#fff;opacity:.28;right:-40px;top:-40px}
+.ph-art{width:62%;height:62%;position:relative;z-index:1}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:var(--r-pill);font-size:12px;background:var(--surface-2);color:var(--ink)}
+
+/* 精选大卡 */
+.feature{margin:0 20px;background:var(--surface);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line)}
+.feature .ph{height:186px;border-radius:0}
+.feature .body{padding:16px 18px 18px}
+.feature .ttl{font-family:var(--font-display);font-size:20px;font-weight:700;line-height:1.35}
+.feature .desc{font-size:14px;color:var(--muted);line-height:1.6;margin-top:8px;overflow-wrap:anywhere}
+.feature .foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+.price{font-size:24px;font-weight:700;color:var(--primary);letter-spacing:-.01em;flex:0 0 auto}
+.price small{font-size:14px;font-weight:600;margin-right:2px}
+.seller{font-size:12px;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+
+/* 宽卡 */
+.wide{margin:12px 20px 0;background:var(--surface);border-radius:var(--r-md);border:1px solid var(--line);padding:12px;display:flex;gap:14px;align-items:center}
+.wide .ph{width:88px;height:88px;flex:0 0 88px;border-radius:10px}
+.wide .info{flex:1;min-width:0}
+.wide .ttl{font-size:16px;font-weight:600;line-height:1.45;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.wide .tags{display:flex;gap:6px;margin-top:8px}
+.wide .price{font-size:20px;margin-top:8px;display:block}
+
+/* 底栏 */
+.tabbar{position:fixed;left:0;right:0;bottom:0;height:83px;padding:0 8px 34px;display:flex;align-items:flex-start;background:var(--surface);border-top:1px solid var(--line);z-index:30}
+.tab{flex:1;height:49px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px;color:var(--muted)}
+.tab.active{color:var(--primary);font-weight:600}
+.tab-pub{justify-content:flex-start;padding-top:0;gap:2px}
+.tab-pub .pub{width:44px;height:44px;margin-top:-16px;border-radius:50%;background:var(--primary);display:grid;place-items:center;box-shadow:0 6px 16px rgba(46,90,60,.30)}
+.tab-pub .pub svg{width:24px;height:24px;fill:none;stroke:var(--on-primary);stroke-width:2;stroke-linecap:round}
+.home-indicator{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:999px;background:var(--ink);opacity:.82;z-index:31}
+</style>
+</head>
+<body>
+
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 15a3 3 0 0 1-3 3H8l-4 3V6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3z"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21a8 8 0 0 1 16 0"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM21 21l-4.3-4.3"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4C10 4 4 9 4 16a4 4 0 0 0 4 4c7 0 12-6 12-16ZM4 20c3-5 7-8 12-10"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 0-2 2zM8 3v16"/></symbol>
+<symbol id="i-chat2" viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12ZM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></symbol>
+<symbol id="ph-book" viewBox="0 0 64 64"><rect x="12" y="16" width="40" height="26" rx="3" fill="var(--ph-a)"/><rect x="12" y="16" width="8" height="26" rx="3" fill="var(--ph-b)"/><rect x="16" y="42" width="36" height="9" rx="2.5" fill="var(--ph-b)"/><rect x="16" y="42" width="7" height="9" rx="2.5" fill="var(--ph-a)"/><rect x="27" y="24" width="18" height="2.6" rx="1.3" fill="#fff" opacity=".65"/><rect x="27" y="30" width="12" height="2.6" rx="1.3" fill="#fff" opacity=".65"/></symbol>
+<symbol id="ph-tablet" viewBox="0 0 64 64"><rect x="9" y="7" width="46" height="46" rx="6" fill="var(--ph-b)"/><rect x="13" y="11" width="38" height="38" rx="3" fill="var(--ph-a)"/><rect x="18" y="16" width="20" height="3" rx="1.5" fill="#fff" opacity=".7"/><rect x="18" y="22" width="28" height="3" rx="1.5" fill="#fff" opacity=".45"/><rect x="18" y="28" width="22" height="3" rx="1.5" fill="#fff" opacity=".45"/><circle cx="32" cy="50" r="1.8" fill="#fff" opacity=".8"/></symbol>
+<symbol id="ph-lamp" viewBox="0 0 64 64"><path d="M19 15h26l-7 18H26z" fill="var(--ph-a)"/><rect x="30" y="33" width="4" height="17" rx="2" fill="var(--ph-b)"/><rect x="21" y="49" width="22" height="5" rx="2.5" fill="var(--ph-b)"/><circle cx="32" cy="12" r="2.6" fill="var(--ph-b)"/></symbol>
+<symbol id="ph-box" viewBox="0 0 64 64"><rect x="12" y="23" width="40" height="25" rx="3" fill="var(--ph-a)"/><rect x="12" y="18" width="40" height="8" rx="3" fill="var(--ph-b)"/><rect x="28" y="27" width="8" height="8" rx="2" fill="var(--ph-b)"/></symbol>
+</defs></svg>
+
+<div class="statusbar">
+  <span class="sb-time">9:41</span>
+  <svg class="sb-icons" viewBox="0 0 78 14" aria-hidden="true">
+    <rect x="0" y="8" width="3" height="6" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/>
+    <path d="M27 4.5a10 10 0 0 1 12 0M29.5 7.5a6.5 6.5 0 0 1 7 0M32.5 10.5a2.6 2.6 0 0 1 1 0" fill="none" stroke="#22392A" stroke-width="1.5" stroke-linecap="round"/>
+    <rect x="50" y="1.5" width="22" height="11" rx="3" fill="none" stroke="#22392A" stroke-width="1.2"/><rect x="52" y="3.5" width="16" height="7" rx="1.5"/><rect x="73" y="5" width="2" height="4" rx="1"/>
+  </svg>
+</div>
+
+<div class="topbar">
+  <div class="brand"><span class="mark"><svg><use href="#i-leaf"/></svg></span>青柠集</div>
+  <a class="campus" href="home-a.html"><svg><use href="#i-pin"/></svg>主校区<svg style="width:12px;height:12px"><use href="#i-chev"/></svg></a>
+</div>
+
+<div class="searchline">
+  <a class="search-pill" href="home-a.html"><svg><use href="#i-search"/></svg>搜教材、搜数码、搜宿舍好物<span class="go">搜索<svg><use href="#i-arrow"/></svg></span></a>
+</div>
+
+<section class="hero">
+  <svg class="hero-art" viewBox="0 0 320 210" aria-hidden="true">
+    <circle cx="246" cy="96" r="92" fill="#ffffff" opacity=".07"/>
+    <circle cx="246" cy="96" r="62" fill="#ffffff" opacity=".06"/>
+    <g opacity=".95">
+      <rect x="196" y="122" width="98" height="15" rx="3" fill="#E7E0C8"/><rect x="196" y="122" width="14" height="15" rx="3" fill="#C08237"/>
+      <rect x="204" y="107" width="84" height="15" rx="3" fill="#F3ECD6"/><rect x="204" y="107" width="12" height="15" rx="3" fill="#8FAE86"/>
+      <rect x="212" y="92" width="72" height="15" rx="3" fill="#E7E0C8"/><rect x="212" y="92" width="10" height="15" rx="3" fill="#C08237"/>
+    </g>
+    <g>
+      <path d="M126 170c-18-30-11-57 3-71 6 22 5 45-3 71Z" fill="#9FC79A" opacity=".9"/>
+      <path d="M128 170c16-26 35-36 51-34-10 22-29 34-51 34Z" fill="#7FB37C" opacity=".9"/>
+      <rect x="114" y="168" width="30" height="21" rx="4" fill="#E7E0C8"/>
+    </g>
+    <g opacity=".85">
+      <path d="M34 58h44l-9 26H43Z" fill="#E7E0C8"/>
+      <rect x="54" y="84" width="4" height="44" rx="2" fill="#CBC4A9"/>
+      <rect x="42" y="127" width="28" height="6" rx="3" fill="#CBC4A9"/>
+    </g>
+  </svg>
+  <div class="hero-copy">
+    <span class="hero-kicker">毕业季 · 第 03 期</span>
+    <h1 class="hero-title">把带不走的<br>留给学弟妹</h1>
+    <p class="hero-sub">本周新增 128 件校园闲置</p>
+    <a class="hero-btn" href="home-a.html">逛逛毕业专区 <svg><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+<nav class="zonerow" aria-label="专区">
+  <a class="zone hot" href="home-a.html"><svg><use href="#i-leaf"/></svg>毕业甩卖</a>
+  <a class="zone" href="home-a.html"><svg><use href="#i-book"/></svg>教材专区</a>
+  <a class="zone" href="home-a.html"><svg><use href="#i-search"/></svg>数码好物</a>
+  <a class="zone" href="home-a.html"><svg><use href="#i-chat2"/></svg>宿舍改造</a>
+</nav>
+
+<div class="sechead">
+  <h2>今日精选</h2>
+  <a class="more" href="home-a.html">共 6 件 <svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8"><use href="#i-arrow"/></svg></a>
+</div>
+
+<a class="feature" href="home-a.html">
+  <div class="ph" style="--ph-bg:#E4EAD4;--ph-a:#6E8F6A;--ph-b:#C08237"><svg class="ph-art"><use href="#ph-book"/></svg></div>
+  <div class="body">
+    <div class="ttl">高等数学 第七版（上下册）附课后答案</div>
+    <div class="desc">几乎没怎么翻过，笔记只在第一章写了几行。考研复习用完，留给下一届。</div>
+    <div class="foot"><span class="price"><small>¥</small>25</span><span class="seller">张同学 · 主校区 · 2 小时前</span></div>
+  </div>
+</a>
+
+<a class="wide" href="home-a.html">
+  <div class="ph" style="--ph-bg:#DDE7E9;--ph-a:#5C8A94;--ph-b:#334F57"><svg class="ph-art"><use href="#ph-tablet"/></svg></div>
+  <div class="info">
+    <div class="ttl">iPad Air 5 64G 深空灰 + 二代 pencil</div>
+    <div class="tags"><span class="tag">95 新</span><span class="tag">可小刀</span></div>
+    <span class="price"><small>¥</small>2280</span>
+  </div>
+</a>
+
+<a class="wide" href="home-a.html">
+  <div class="ph" style="--ph-bg:#EFE6D2;--ph-a:#C99B54;--ph-b:#7A6437"><svg class="ph-art"><use href="#ph-lamp"/></svg></div>
+  <div class="info">
+    <div class="ttl">小米台灯 1S，护眼暖光，宿舍神器</div>
+    <div class="tags"><span class="tag">九成新</span><span class="tag">面交</span></div>
+    <span class="price"><small>¥</small>59</span>
+  </div>
+</a>
+
+<a class="wide" href="home-a.html">
+  <div class="ph" style="--ph-bg:#E6E9DA;--ph-a:#87A06C;--ph-b:#4E6440"><svg class="ph-art"><use href="#ph-box"/></svg></div>
+  <div class="info">
+    <div class="ttl">宿舍收纳箱 3 个一起出，搬宿舍用不上了</div>
+    <div class="tags"><span class="tag">八成新</span><span class="tag">自提</span></div>
+    <span class="price"><small>¥</small>20</span>
+  </div>
+</a>
+
+<div class="home-indicator"></div>
+<nav class="tabbar" aria-label="底部导航">
+  <a class="tab active" href="home-a.html"><svg class="ti"><use href="#i-home"/></svg><span>首页</span></a>
+  <a class="tab tab-pub" href="home-a.html"><span class="pub"><svg><use href="#i-plus"/></svg></span><span>发布</span></a>
+  <a class="tab" href="home-a.html"><svg class="ti"><use href="#i-chat"/></svg><span>消息</span></a>
+  <a class="tab" href="home-a.html"><svg class="ti"><use href="#i-user"/></svg><span>我的</span></a>
+</nav>
+</body>
+</html>
